@@ -20,7 +20,7 @@ public class EventServiceImpl implements EventService {
 			throw new StudyUpException("No event found.");
 		}
 
-		if(name.length() >= 20) {
+		if(name.length() >= 20) {  // CHANGE from >= to just >
 			throw new StudyUpException("Length too long. Maximun is 20");
 		}
 		event.setName(name);
@@ -31,18 +31,18 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> getActiveEvents() {
-		Map<Integer, Event> eventData = DataStorage.eventData;
-		List<Event> activeEvents = new ArrayList<>();
+		Map<Integer, Event> eventData = DataStorage.eventData; // is this correct sytax?
+		List<Event> activeEvents = new ArrayList<>(); // check if created properly
 		
-		for (Integer key : eventData.keySet()) {
-			Event ithEvent= eventData.get(key);
-			activeEvents.add(ithEvent);
+		for (Integer key : eventData.keySet()) { // maybe not supposed to check in keySet? make sure not going out of bounds
+			Event ithEvent= eventData.get(key); // this var might need to be declared outside of for loop
+			activeEvents.add(ithEvent); // check that this line worked
 		}
 		return activeEvents;
 	}
 
 	@Override
-	public List<Event> getPastEvents() {
+	public List<Event> getPastEvents() { // NO BUGS IN THIS ONE
 		Map<Integer, Event> eventData = DataStorage.eventData;
 		List<Event> pastEvents = new ArrayList<>();
 		
@@ -56,9 +56,9 @@ public class EventServiceImpl implements EventService {
 		return pastEvents;
 	}
 
-	@Override
+	@Override 
 	public Event addStudentToEvent(Student student, int eventID) throws StudyUpException {
-		Event event = DataStorage.eventData.get(eventID);
+		Event event = DataStorage.eventData.get(eventID); 
 		if(event == null) {
 			throw new StudyUpException("No event found.");
 		}
@@ -66,13 +66,13 @@ public class EventServiceImpl implements EventService {
 		if(presentStudents == null) {
 			presentStudents = new ArrayList<>();
 		}
-		presentStudents.add(student);
-		event.setStudents(presentStudents);		
-		return DataStorage.eventData.put(eventID, event);
+		presentStudents.add(student);  
+		event.setStudents(presentStudents); 
+		return DataStorage.eventData.put(eventID, event); 
 	}
 
 	@Override
-	public Event deleteEvent(int eventID) {		
+	public Event deleteEvent(int eventID) {		// NO BUGS IN THIS ONE
 		return DataStorage.eventData.remove(eventID);
 	}
 

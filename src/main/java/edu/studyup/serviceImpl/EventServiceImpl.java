@@ -34,10 +34,16 @@ public class EventServiceImpl implements EventService {
 		Map<Integer, Event> eventData = DataStorage.eventData; // is this correct sytax?
 		List<Event> activeEvents = new ArrayList<>(); // check if created properly
 		
-		for (Integer key : eventData.keySet()) { // maybe not supposed to check in keySet? make sure not going out of bounds
+		/*for (Integer key : eventData.keySet()) { // maybe not supposed to check in keySet? make sure not going out of bounds
 			Event ithEvent= eventData.get(key); // this var might need to be declared outside of for loop
 			activeEvents.add(ithEvent); // check that this line worked
+		}*/
+		
+		for (Map.Entry<Integer, Event> entry : eventData.entrySet()) { // maybe not supposed to check in keySet? make sure not going out of bounds
+			Event ithEvent= entry.getValue(); // this var might need to be declared outside of for loop
+			activeEvents.add(ithEvent); // check that this line worked
 		}
+		
 		return activeEvents;
 	}
 
@@ -46,13 +52,22 @@ public class EventServiceImpl implements EventService {
 		Map<Integer, Event> eventData = DataStorage.eventData;
 		List<Event> pastEvents = new ArrayList<>();
 		
-		for (Integer key : eventData.keySet()) {
+		/*for (Integer key : eventData.keySet()) {
 			Event ithEvent= eventData.get(key);
 			// Checks if an event date is before today, if yes, then add to the past event list.
 			if(ithEvent.getDate().before(new Date())) {
 				pastEvents.add(ithEvent);
 			}
+		} */
+		
+		for (Map.Entry<Integer, Event> entry : eventData.entrySet()) {
+			Event ithEvent= entry.getValue();
+			// Checks if an event date is before today, if yes, then add to the past event list.
+			if(ithEvent.getDate().before(new Date())) {
+				pastEvents.add(ithEvent);
+			}
 		}
+		
 		return pastEvents;
 	}
 

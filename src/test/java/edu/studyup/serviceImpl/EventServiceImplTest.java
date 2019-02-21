@@ -212,10 +212,6 @@ class EventServiceImplTest {
 		student.setEmail("JohnSmith@email.com");
 		student.setId(2);
 		
-		//Get Event
-		Event event = DataStorage.eventData.get(1);
-		List<Student> eventStudents = event.getStudents();
-		
 		Assertions.assertDoesNotThrow( () -> { 
 			eventServiceImpl.addStudentToEvent(student, eventID);
 		});
@@ -271,8 +267,6 @@ class EventServiceImplTest {
 	
 	@Test
 	void testAddStudentToEvent_nullStudents() {
-		Event event = DataStorage.eventData.get(1);
-		Event ret = eventServiceImpl.deleteEvent(1);
 		
 		//Create Student
 		Student student = new Student();
